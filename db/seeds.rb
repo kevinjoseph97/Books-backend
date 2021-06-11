@@ -7,8 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-fiction = Genre.create(Type: "Fiction")
-history = Genre.create(Type: "history")
-novel = Genre.create(Type: "Novel")
+comedy = Genre.create(name: "comedy")
+history = Genre.create(name: "history")
+novel = Genre.create(name: "Novel")
 
 Book.create(title: "HP adn ST", author: "JK ROWLING", book_img: "https://images-na.ssl-images-amazon.com/images/I/51SBx6jWilL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg", genre_id: novel.id)
+
+
