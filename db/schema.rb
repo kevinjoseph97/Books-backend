@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2021_06_11_181802) do
     t.string "title"
     t.string "author"
     t.string "book_img"
-    t.integer "genre_id"
+    t.integer "genre_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["genre_id"], name: "index_books_on_genre_id"
