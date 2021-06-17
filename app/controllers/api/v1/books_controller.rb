@@ -1,14 +1,20 @@
 class Api::V1::BooksController < ApplicationController
+    before_action :set_book, only: [:show, :update, :destroy]
 
     def index 
         @books = Book.all 
         render json: BookSerializer.new(@books)
     end
+
+    def show
+        render json: @book
+      end
+    
     
     def create 
-        @book - Book.new(books_params)
+        @book = Book.new(books_params)
         if @book.save
-            render json: @book, status: :accepted
+            render json:BookSerializer.new(@book), status: :accepted
         else
             render json: {errors: book.errors.full_messages}, status:
             :unprocessible_entity
@@ -16,12 +22,29 @@ class Api::V1::BooksController < ApplicationController
         end
     end 
 
+    def update
+        if @book.update(book_params)
+          render json: @book
+        else
+            render json: {errors: book.errors.full_messages}, status:
+            :unprocessible_entity
+        end
+    end
+
+    def destroy
+        @book.destroy
+    end
+
 
 
     private 
 
     def books_params
         params.require(:book).permit(:title, :author, :book_img, :genre_id)
+    end
+
+    def set_book
+        @book = Book.find(params[:id])
     end
 
 
