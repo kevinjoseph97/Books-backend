@@ -2,13 +2,20 @@ class Api::V1::BooksController < ApplicationController
     before_action :set_book, only: [:show, :update, :destroy]
 
     def index 
-        @books = Book.all 
+        # @books = Book.all 
+        # render json: BookSerializer.new(@books)
+        if params[:genre_id]
+            @genre = Genre.find_by_id(params[:genre_id])
+            @books = @genre.books
+        else
+            @books = Book.all
+        end
         render json: BookSerializer.new(@books)
     end
 
     def show
         render json: @book
-      end
+    end
     
     
     def create 
