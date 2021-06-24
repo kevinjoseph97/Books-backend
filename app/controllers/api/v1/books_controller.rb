@@ -23,17 +23,17 @@ class Api::V1::BooksController < ApplicationController
         if @book.save
             render json:BookSerializer.new(@book), status: :accepted
         else
-            render json: {errors: book.errors.full_messages}, status:
+            render json: {errors: @book.errors.full_messages}, status:
             :unprocessible_entity
 
         end
     end 
 
     def update
-        if @book.update(book_params)
+        if @book.update(books_params)
           render json: @book
         else
-            render json: {errors: book.errors.full_messages}, status:
+            render json: {errors: @book.errors.full_messages}, status:
             :unprocessible_entity
         end
     end
@@ -45,7 +45,6 @@ class Api::V1::BooksController < ApplicationController
 
 
     private 
-
     def books_params
         params.require(:book).permit(:title, :author, :book_img, :genre_id)
     end
